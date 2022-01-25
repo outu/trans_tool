@@ -1,0 +1,20 @@
+{
+  "server": "127.0.0.1",
+  "port": "8080",
+  "database": {
+    "default": {
+      "type": "mysql",
+      "server": "127.0.0.1",
+      "port": "3306",
+      "socket": "",
+      "user": "root",
+      "password": "jcb410",
+      "database": "chinark_drc_db"
+    },
+    "sqlite": {
+      "type": "sqlite",
+      "file": "/home/capsheaf.db3"
+    }
+  },
+  "debug": "true"
+}
