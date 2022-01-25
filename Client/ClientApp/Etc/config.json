@@ -1,0 +1,26 @@
+{
+  "server": "127.0.0.1",
+  "port": "80",
+  "database": {
+    "default": {
+      "type": "mysql",
+      "server": "127.0.0.1",
+      "port": "3306",
+      "socket": "",
+      "user": "root",
+      "password": "jcb410",
+      "database": "trans_db"
+    },
+    "sqlite": {
+      "type": "sqlite",
+      "file": "/home/capsheaf.db3"
+    }
+  },
+  "trans": 4,
+  "ftp": {
+    "user": "ftp1",
+    "password": "jcb410",
+    "server": "127.0.0.1"
+  },
+  "debug": "true"
+}
