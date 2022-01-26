@@ -1,27 +1,22 @@
-import {API_GET_GIT_VERSION} from "../../public/api.js";
-import {API_BUILD_WINDOWS_CLIENT} from "../../public/api.js";
+
 
 export default {
-    name: 'WindowsClient',
+    name: 'LinuxClient',
     template: `
-    <div class="build build-windows-client">
-        
-        <div class="card mb-4">
-            <div class="card-body">
-                <div> Git version: {{ gitVersion }}</div>
-            </div>
-        </div>
+    <div class="build build-linux-client-bs">
         <form>
         <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="inputBuildToolPath">ISCmdBld.exe</label>
-                <input type="text" class="form-control" id="inputBuildToolPath" placeholder="IsCmdBld.exe located in local filesystem" v-model="buildToolPath">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-4">
               <label for="inputVersion">Version</label>
               <input type="text" class="form-control" id="inputVersion" placeholder="2.4.0" v-model="version">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputVersion">Arch</label>
+              <select id="inputRelease" class="form-control" v-model="arch">
+                <option selected>RHEL6-x86_64</option>
+                <option>RHEL7-x86_64</option>
+                <option>NEOKLIN7-x86_64</option>           
+              </select>
             </div>
             <div class="form-group col-md-2">
               <label for="inputRelease">Encrypt</label>
@@ -43,7 +38,7 @@ export default {
           </div>
         </form>
         <div>
-            <button type="button" class="btn btn-primary" :disabled="!!buildButtonDisabled" v-on:click="buildServer">Build Windows Client exe now</button>
+            <button type="button" class="btn btn-primary" :disabled="!!buildButtonDisabled" v-on:click="buildServer">Build Linux Client zip now</button>
         </div>
         <div v-if="!!buildButtonDisabled" class="spinner-border text-primary mt-2" role="status"></div>
         <!-- Modal -->
@@ -71,9 +66,9 @@ export default {
         return {
             message: '',
             gitVersion: '',
-            version: '2.4.5',
+            version: '3.4.0',
+            arch: 'RHEL6-x86_64',
             release: 'alpha',
-            buildToolPath: 'C:\\Program Files (x86)\\InstallShield\\2019\\System\\IsCmdBld.exe',
             encrypt: 'NC',
             buildButtonDisabled: false,
         }
@@ -91,10 +86,10 @@ export default {
     methods: {
         buildServer: function () {
             this.buildButtonDisabled = true;
-            API_BUILD_WINDOWS_CLIENT({
+            API_BUILD_LINUX_CLIENT_BS({
                 sVersion: this.version,
+                sArch:    this.arch,
                 sRelease: this.release,
-                sBuildToolPath: this.buildToolPath,
                 bEncrypt: this.encrypt === 'EC' ? 1 : 0,
             })
                 .then((response) => {

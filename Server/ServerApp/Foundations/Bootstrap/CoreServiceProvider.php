@@ -36,6 +36,7 @@ class CoreServiceProvider
     {
         $this->bindLogger();
         $this->bindConfig();
+        $this->bindDatabase();
 
         return $this;
     }
@@ -45,6 +46,7 @@ class CoreServiceProvider
     {
         $this->initConfig();
         $this->initKernel();
+        $this->initDatabase();
     }
 
 
@@ -90,12 +92,30 @@ class CoreServiceProvider
     }
 
 
+    protected function bindDatabase()
+    {
+        $this->m_app->singleton(
+            'db',
+            'Capsheaf\Database\DatabaseManager'
+        );
+    }
+
+
     protected function initConfig()
     {
         $sConfigFilePath = APP_PATH.'Etc/config.json';
 
         $this->m_app->makeWith('config', ['sConfigFilePath' => $sConfigFilePath]);
         app('log')->debug('Loaded final config:', $this->m_app['config']->all());
+
+        return $this;
+    }
+
+
+    protected function initDatabase()
+    {
+        $this->m_app->make('db');
+        app('log')->debug("Database component initialized.");
 
         return $this;
     }

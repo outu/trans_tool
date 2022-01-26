@@ -31,55 +31,6 @@ const apiRequest = (sModule, sController, sAction, arrExtraParameters = {}) => {
 
 
 
-export const API_GET_GIT_VERSION = (arrExtraParameters) => {
-    return apiRequest('Index', 'Index', 'getGitVersion');
-};
-
-export const API_BUILD_SERVER = (arrExtraParameters) => {
-    return apiRequest('Builder', 'ServerBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_SERVER_HA = (arrExtraParameters) => {
-    return apiRequest('Builder', 'ServerHaBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_LINUX_CLIENT = (arrExtraParameters) => {
-    if (arrExtraParameters.sType === 'zip'){
-        return apiRequest('Builder', 'LinuxClientBuilder', 'build', arrExtraParameters)
-    } else {
-        return apiRequest('Builder', 'LinuxClientOfRpmOrDebBuilder', 'build', arrExtraParameters)
-    }
-};
-
-
-export const API_CHECK_BUILDER_ENV = (arrExtraParameters) => {
-    if (arrExtraParameters.sType === 'zip'){
-        return apiRequest('Builder', 'LinuxClientBuilder', 'check', arrExtraParameters)
-    } else {
-        return apiRequest('Builder', 'LinuxClientOfRpmOrDebBuilder', 'check', arrExtraParameters)
-    }
-};
-
-export const API_BUILD_LINUX_CLIENT_BS = (arrExtraParameters) => {
-    return apiRequest('Builder', 'LinuxClientBsBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_LINUX_CLIENT_VOLCDPHA = (arrExtraParameters) => {
-    return apiRequest('Builder', 'LinuxClientVolCdpHaBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_WINDOWS_CLIENT = (arrExtraParameters) => {
-    return apiRequest('Builder', 'WindowsClientBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_WINDOWS_CLIENT_BS = (arrExtraParameters) => {
-    return apiRequest('Builder', 'WindowsClientBsBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_WINDOWS_CLIENT_OS = (arrExtraParameters) => {
-    return apiRequest('Builder', 'WindowsClientOsBuilder', 'build', arrExtraParameters)
-};
-
-export const API_BUILD_WINDOWS_CLIENT_VOLCDPHA = (arrExtraParameters) => {
-    return apiRequest('Builder', 'WindowsClientVolCdpHaBuilder', 'build', arrExtraParameters)
-};
+export const API_CREATE_NEW_TASK = (arrExtraParameters) => {
+    return apiRequest('Task', 'Index', 'newTask', arrExtraParameters)
+}

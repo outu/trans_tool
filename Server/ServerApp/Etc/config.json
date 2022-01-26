@@ -9,7 +9,7 @@
       "socket": "",
       "user": "root",
       "password": "jcb410",
-      "database": "chinark_drc_db"
+      "database": "trans_db"
     },
     "sqlite": {
       "type": "sqlite",

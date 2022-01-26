@@ -1,16 +1,11 @@
-import {API_GET_GIT_VERSION} from "../../public/api.js";
-import {API_BUILD_SERVER} from "../../public/api.js";
+
 
 export default {
     name: 'App',
     template: `
     <div class="build build-server">
         
-        <div class="card mb-4">
-            <div class="card-body">
-                <div> Git version: {{ gitVersion }}</div>
-            </div>
-        </div>
+        
         <form>
         <div class="form-row">
             <div class="form-group col-md-8">

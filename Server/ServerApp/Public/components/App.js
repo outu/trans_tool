@@ -4,7 +4,7 @@ export default {
     <div class="app">
         <div class="header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Capsheaf Builder</a>
+                <a class="navbar-brand" href="#">trans tool</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,18 +23,12 @@ export default {
     </div>
   `,
     data(){
-        this.$router.push('/BuildServer');
+        this.$router.push('/NewTask');
         return {
             builderLinkNameList:[
-                {buildLinkName: "Server", path: "/BuildServer"},
-                {buildLinkName: "ServerHa", path: "/BuildServerHa"},
-                {buildLinkName: "WindowsClient", path: "/BuildWindowsClient"},
-                {buildLinkName: "WinBs", path: "/BuildWindowsClientBs"},
-                {buildLinkName: "WinOs", path: "/BuildWindowsClientOs"},
-                {buildLinkName: "WinVolCdpHa", path: "/BuildWindowsClientVolCdpHa"},
-                {buildLinkName: "LinuxClient", path: "/BuildLinuxClient"},
-                {buildLinkName: "LinBs", path: "/BuildLinuxClientBs"},
-                {buildLinkName: "LinVolCdpHa", path: "/BuildLinuxClientVolCdpHa"},
+                {buildLinkName: "New Task", path: "/NewTask"},
+                {buildLinkName: "Monitor Task", path: "/MonitorTask"},
+                {buildLinkName: "Completed Task", path: "/CompletedTask"},
             ],
             selectLi: 0,
         }
