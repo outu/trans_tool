@@ -25,7 +25,7 @@ class TransTask extends BaseModel
     public function getTransTask()
     {
         return $this->M()
-            ->whereIn('state', ['TASK_WARNING', 'TASK_SCANNING'])
+            ->whereIn('state', ['TASK_WAITING', 'TASK_SCANNING'])
             ->get();
     }
 

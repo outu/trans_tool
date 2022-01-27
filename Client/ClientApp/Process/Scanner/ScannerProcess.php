@@ -15,28 +15,36 @@ namespace ClientApp\Process\Scanner;
 use ClientApp\Models\Client\TransList;
 use ClientApp\Models\Client\TransTask;
 use ClientApp\Process\AbstractProcess;
+use DateTime;
 
 class ScannerProcess extends AbstractProcess
 {
+    public $m_sProcess = 'scanner';
+    //需单独进行日志记录
     public function run($nPid)
     {
-        $this->m_app['log']->info("scanner started...");
+        $this->init();
+
+        $this->process['log']->info("scanner started...");
         $arrTransTask = (new TransTask())->getTransTask();
 
         foreach ($arrTransTask as $arrOneTransTask){
 
-            $arrMeta = json_decode($arrOneTransTask['meta']);
+            $arrMeta = json_decode($arrOneTransTask['meta'], true);
             $nTaskId = $arrOneTransTask['id'];
-            (new TransTask())->updateTaskStatus('TASK_SCANNING', $nTaskId);
+            (new TransTask())->updateTaskStatus($nTaskId, 'TASK_SCANNING');
 
-            foreach ($arrMeta as $sTransRecord){
-                $this->dfs($sTransRecord, $nTaskId);
+            $arrFtpInfo      = $arrMeta['arrFtpInfo'];
+            $arrSelectedFile = $arrMeta['arrSelectedFile'];
+
+            foreach ($arrSelectedFile as $sSelectedFile){
+                $this->dfs($sSelectedFile, $nTaskId, $arrFtpInfo);
             }
 
-            (new TransTask())->updateTaskStatus('TASK_SCANNED', $nTaskId);
+            (new TransTask())->updateTaskStatus( $nTaskId, 'TASK_SCANNED');
         }
 
-        $this->m_app['log']->info("current scanner finished...");
+        $this->process['log']->info("current scanner finished...");
     }
 
 
@@ -44,7 +52,7 @@ class ScannerProcess extends AbstractProcess
      * 深度遍历目录，并更新扫描信息到数据库中
      * @return void
      */
-    private function dfs($sDirOrFile, $nTaskId)
+    private function dfs($sDirOrFile, $nTaskId, $arrFtpInfo)
     {
         if (is_dir($sDirOrFile)){
             if ($hDir = opendir($sDirOrFile)){
@@ -53,10 +61,10 @@ class ScannerProcess extends AbstractProcess
                         continue;
                     }
 
-                    $sAbsPath = "{$sDirOrFile}{$sFile}";
+                    $sAbsPath = "{$sDirOrFile}/{$sFile}";
 
                     if (is_dir($sAbsPath)){
-                        $this->dfs($sAbsPath, $nTaskId);
+                        $this->dfs($sAbsPath, $nTaskId, $arrFtpInfo);
                     } else {
                         $this->processFile($sAbsPath, $nTaskId);
                     }
@@ -73,12 +81,15 @@ class ScannerProcess extends AbstractProcess
         if (file_exists($sFilePath)){
             $nSize = filesize($sFilePath);
             $arrParameter = [
-                'record' => $sFilePath,
-                'size'   => $nSize,
-                'state'  => 'WAITING'
+                'record'  => $sFilePath,
+                'task_id' => $nTaskId,
+                'size'    => $nSize,
+                'state'   => 'WAITING',
+                'keep_alive' => time(),
+                'created_at' => new DateTime()
             ];
 
-            (new TransList())->updateTransList($nTaskId, $arrParameter);
+            (new TransList())->insertTransList($arrParameter);
         }
     }
 

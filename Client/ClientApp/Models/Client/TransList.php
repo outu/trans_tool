@@ -27,10 +27,9 @@ class TransList extends BaseModel
     }
 
 
-    public function updateTransList($nTransId, $arrKVPair)
+    public function insertTransList($arrKVPair)
     {
         return $this->M()
-            ->where('id', $nTransId)
-            ->update($arrKVPair);
+            ->insert($arrKVPair);
     }
 }

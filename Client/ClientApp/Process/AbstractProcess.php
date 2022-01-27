@@ -12,17 +12,34 @@
 
 namespace ClientApp\Process;
 
-use Capsheaf\Application\Application;
+use Capsheaf\Log\Formatter\LineFormatter;
+use Capsheaf\Log\Logger;
+use Capsheaf\Log\LogHandler\StreamHandler;
 
 abstract class AbstractProcess
 {
-    protected $m_app;
+    public $m_sProcess = 'process';
+
+    public $process;
 
     abstract public function run($nPid);
 
 
-    public function init(Application $app)
+    public function init()
     {
-        $this->m_app = $app;
+        $this->process['log'] = $this->initLog();
+    }
+
+
+    private function initLog()
+    {
+
+        $logHandlerStdout = new StreamHandler('php://stdout');
+        $logHandlerFile = new StreamHandler(RUNTIME_PATH.$this->m_sProcess . '.log');
+        $logFormatter = new LineFormatter();
+        $logHandlerStdout->setFormatter($logFormatter);
+        $logHandlerFile->setFormatter($logFormatter);
+
+        return new Logger($this->m_sProcess, [$logHandlerStdout, $logHandlerFile]);
     }
 }

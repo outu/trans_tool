@@ -23,10 +23,12 @@ class IndexController extends BaseController
         $nSelectedFileCount = count($arrSelectedFile);
 
         $arrParameters = [
-            'sIp'             => $sIp,
-            'sPort'           => $sPort,
-            'sUser'           => $sUser,
-            'sPassword'       => $sPassword,
+            'arrFtpInfo'      => [
+                'sIp'             => $sIp,
+                'sPort'           => $sPort,
+                'sUser'           => $sUser,
+                'sPassword'       => $sPassword,
+            ],
             'arrSelectedFile' =>$arrSelectedFile
         ];
 
