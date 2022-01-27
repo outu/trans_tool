@@ -19,8 +19,8 @@ use DateTime;
 
 class ScannerProcess extends AbstractProcess
 {
-    public $m_sProcess = 'scanner';
-    //需单独进行日志记录
+    public $m_sProcess = 'scanner_process';
+
     public function run($nPid)
     {
         $this->init();

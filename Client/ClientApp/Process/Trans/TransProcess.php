@@ -16,15 +16,15 @@ use ClientApp\Process\AbstractProcess;
 
 class TransProcess extends AbstractProcess
 {
-    public function init()
-    {
-        // TODO: Implement init() method.
-    }
-
+    public $m_sProcess = 'trans_process';
 
     public function run($nPid)
     {
-        // TODO: Implement run() method.
+        $this->init();
+
+        $this->process['log']->info("trans starting...");
+sleep(10);
+        $this->process['log']->info("trans end...");
     }
 
 }
