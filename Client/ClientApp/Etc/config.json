@@ -18,9 +18,10 @@
   },
   "trans": 4,
   "ftp": {
-    "user": "ftp1",
-    "password": "jcb410",
-    "server": "127.0.0.1"
+    "user": "secretauth",
+    "password": "jcb4105443",
+    "server": "192.168.173.40",
+    "port": "28031"
   },
   "debug": "true"
 }

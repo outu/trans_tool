@@ -27,9 +27,34 @@ class TransList extends BaseModel
     }
 
 
+    public function getFinishedTransListCountByTaskId($nTaskId)
+    {
+        return $this->M()
+            ->where('task_id', $nTaskId)
+            ->where('state', 'HANDED')
+            ->count();
+    }
+
+
     public function insertTransList($arrKVPair)
     {
         return $this->M()
             ->insert($arrKVPair);
+    }
+
+
+    public function getOneTransRecord()
+    {
+        return $this->M()
+            ->where('state', 'WAITING')
+            ->first();
+    }
+
+
+    public function updateListStatus($nListId, $sState)
+    {
+        return $this->M()
+            ->where('id', $nListId)
+            ->update(['state' => $sState]);
     }
 }

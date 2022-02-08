@@ -12,6 +12,8 @@
 
 namespace ClientApp\Process;
 
+use Capsheaf\Config\Config;
+use Capsheaf\Config\JsonConfig;
 use Capsheaf\Log\Formatter\LineFormatter;
 use Capsheaf\Log\Logger;
 use Capsheaf\Log\LogHandler\StreamHandler;
@@ -27,7 +29,8 @@ abstract class AbstractProcess
 
     public function init()
     {
-        $this->process['log'] = $this->initLog();
+        $this->process['log']    = $this->initLog();
+        $this->process['config'] = $this->initConfig();
     }
 
 
@@ -41,5 +44,13 @@ abstract class AbstractProcess
         $logHandlerFile->setFormatter($logFormatter);
 
         return new Logger($this->m_sProcess, [$logHandlerStdout, $logHandlerFile]);
+    }
+
+
+    private function initConfig()
+    {
+        $sBaseConfigPath = APP_PATH . "Etc/config.json";
+
+        return new JsonConfig($sBaseConfigPath);
     }
 }

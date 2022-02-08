@@ -123,6 +123,10 @@ class TransModule extends AbstractModule
 
             //回收结束运行的子进程
             swoole_process::wait(false);
+
+
+            //监控任务是否结束
+            $this->listenScannedTask();
         }
     }
 
@@ -132,6 +136,27 @@ class TransModule extends AbstractModule
 
 
 
+    }
+
+
+    /**
+     * 监控扫描完成的任务是否传输完成，并更新状态
+     * @return void
+     */
+    private function listenScannedTask()
+    {
+        $transTask = new TransTask();
+        $transList = new TransList();
+
+        $arrScannedTask = $transTask->getScanTransTask();
+
+        if (!empty($arrScannedTask)){
+            foreach ($arrScannedTask as $arrOneScannedTask){
+                if ($transList->getFinishedTransListCountByTaskId($arrOneScannedTask['id']) === null){
+                    $transTask->updateTaskStatus($arrOneScannedTask['id'], 'TASK_FINISHED');
+                }
+            }
+        }
     }
 
 

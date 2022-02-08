@@ -37,4 +37,12 @@ class TransTask extends BaseModel
             ->update(['state' => $sState]);
     }
 
+
+    public function getScanTransTask()
+    {
+        return $this->M()
+            ->where('state', 'TASK_SCANNED')
+            ->get();
+    }
+
 }
