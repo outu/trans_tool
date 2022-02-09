@@ -6,18 +6,12 @@ export default {
     template: `
     <div class="build build-linux-client">
         <el-table :data="list.slice((currentPage-1)*pagesize, currentPage*pagesize)" stripe stype="width: 100%">
-
-            <el-table-column prop="id" label="序号" ></el-table-column>
-            
-            <el-table-column prop="record" label="文件"></el-table-column>
-            
+            <el-table-column prop="id" label="序号" width="200%"></el-table-column>
+            <el-table-column prop="record" label="文件" show-overflow-tooltip></el-table-column>
             <el-table-column prop="size" label="大小"></el-table-column>
             <el-table-column prop="state" label="状态"></el-table-column>
             <el-table-column prop="created_at" label="创建时间"></el-table-column>
             <el-table-column prop="updated_at" label="完成时间"></el-table-column>
-  
-
-       
         </el-table>
         <el-pagination
             @size-change="handleSizeChange"
