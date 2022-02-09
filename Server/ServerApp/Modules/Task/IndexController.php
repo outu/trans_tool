@@ -13,6 +13,7 @@
 namespace ServerApp\Modules\Task;
 
 use ServerApp\Models\Task\TransTask;
+use ServerApp\Models\Task\TransList;
 use ServerApp\Modules\BaseController;
 
 class IndexController extends BaseController
@@ -35,5 +36,14 @@ class IndexController extends BaseController
         (new TransTask())->addTask($arrParameters);
 
         return $this->success($nSelectedFileCount);
+    }
+
+
+    public function getCompletedTransList($pagesize, $currentPage)
+    {
+        $arrFinishedTransList = (new TransList())->getCompletedTransList($pagesize, $currentPage);
+        $nFinishedTransList   = (new TransList())->getCompletedTransListCount();
+
+        return $this->success(['list' => $arrFinishedTransList, 'count' => $nFinishedTransList]);
     }
 }

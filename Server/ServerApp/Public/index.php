@@ -7,11 +7,13 @@
     <title>trans tool</title>
     <link rel="stylesheet" href="./vendor/bootstrap.min.css">
     <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./public/css/element.css">
     <script src="./vendor/vue.js"></script>
     <script src="./vendor/vue-router.js"></script>
     <script src="./vendor/axios.min.js"></script>
     <script src="./vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="./vendor/bootstrap.min.js"></script>
+    <script src="./vendor/element.js"></script>
     <script src="./public/main.js" type="module"></script>
 </head>
 <body>

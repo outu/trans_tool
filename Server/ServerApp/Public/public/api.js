@@ -34,3 +34,7 @@ const apiRequest = (sModule, sController, sAction, arrExtraParameters = {}) => {
 export const API_CREATE_NEW_TASK = (arrExtraParameters) => {
     return apiRequest('Task', 'Index', 'newTask', arrExtraParameters)
 }
+
+export const API_GET_COMPLETED_TRANSLIST = (arrExtraParameters) => {
+    return apiRequest('Task', 'Index', 'getCompletedTransList', arrExtraParameters)
+}
