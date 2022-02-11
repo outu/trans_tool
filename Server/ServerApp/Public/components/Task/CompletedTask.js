@@ -4,9 +4,11 @@ import {API_GET_COMPLETED_TRANSLIST} from "../../public/api.js";
 export default {
     name: 'App',
     template: `
-    <div class="build build-linux-client">
-    
-        <div v-if="!loading">
+    <div class="build build-linux-client build-body">
+        <div v-if="!!loading" class="loading">
+            <img src="../../public/css/image/loading.gif" class="img-loading">
+        </div>
+        <div v-if="!loading" class="table">
             <el-table :data="list.slice((currentPage-1)*pagesize, currentPage*pagesize)" stripe stype="width: 100%">
                 <el-table-column prop="id" label="序号" width="200%"></el-table-column>
                 <el-table-column prop="record" label="文件" show-overflow-tooltip></el-table-column>
@@ -26,9 +28,7 @@ export default {
             </el-pagination>
         </div>
         
-        <div v-if="!!loading">
-            <img src="../../public/css/image/loading.gif">
-        </div>
+        
         
         <div v-if="!!buildButtonDisabled" class="spinner-border text-primary mt-2" role="status"></div>
         <!-- Modal -->

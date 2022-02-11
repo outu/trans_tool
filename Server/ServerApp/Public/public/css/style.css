@@ -1,6 +1,19 @@
-img {
+.img-loading {
     width: 25px;
     height: 25px;
-    margin: 0 auto;
 }
 
+.build-body {
+    position:relative;
+}
+
+.loading {
+    margin: 18% 40% 50% 50%;
+    position: absolute;
+    z-index: 2;
+}
+
+.table {
+    position: relative;
+    z-index: 1;
+}
