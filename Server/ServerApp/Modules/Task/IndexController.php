@@ -46,4 +46,13 @@ class IndexController extends BaseController
 
         return $this->success(['list' => $arrFinishedTransList, 'count' => $nFinishedTransList]);
     }
+
+
+    public function getInCompleteTransList($pagesize, $currentPage)
+    {
+        $arrFinishedTransList = (new TransList())->getInCompleteTransList($pagesize, $currentPage);
+        $nFinishedTransList   = (new TransList())->getInCompleteTransListCount();
+
+        return $this->success(['list' => $arrFinishedTransList, 'count' => $nFinishedTransList]);
+    }
 }

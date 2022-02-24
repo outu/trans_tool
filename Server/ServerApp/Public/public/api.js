@@ -38,3 +38,7 @@ export const API_CREATE_NEW_TASK = (arrExtraParameters) => {
 export const API_GET_COMPLETED_TRANSLIST = (arrExtraParameters) => {
     return apiRequest('Task', 'Index', 'getCompletedTransList', arrExtraParameters)
 }
+
+export const API_GET_INCOMPLETE_TRANSLIST = (arrExtraParameters) => {
+    return apiRequest('Task', 'Index', 'getInCompleteTransList', arrExtraParameters)
+}

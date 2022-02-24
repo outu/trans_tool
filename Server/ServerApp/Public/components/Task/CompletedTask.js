@@ -13,7 +13,13 @@ export default {
                 <el-table-column prop="id" label="序号" width="200%"></el-table-column>
                 <el-table-column prop="record" label="文件" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="size" label="大小"></el-table-column>
-                <el-table-column prop="state" label="状态"></el-table-column>
+                
+                <el-table-column label="状态">
+                    <template slot-scope="scope">
+                        {{scope.row.state == "HANDED" ? "传输完成" : "传输完成，但状态未知"}}
+                    </template>
+                </el-table-column>
+                
                 <el-table-column prop="created_at" label="创建时间"></el-table-column>
                 <el-table-column prop="updated_at" label="完成时间"></el-table-column>
             </el-table>

@@ -36,4 +36,21 @@ class TransList extends BaseModel
             ->count();
     }
 
+
+    public function getInCompleteTransList($pagesize, $currentPage)
+    {
+        return $this->M()
+            ->whereIn('state', ['WAITING', 'HANDING', "OFFLINE"])
+            ->orderBy('id')
+            //->limit($pagesize)
+            ->get();
+    }
+
+
+    public function getInCompleteTransListCount()
+    {
+        return $this->M()
+            ->whereIn('state', ['WAITING', 'HANDING', "OFFLINE"])
+            ->count();
+    }
 }
