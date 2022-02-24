@@ -28,7 +28,7 @@ CREATE TABLE `trans_list` (
     `keep_alive` char(15) NOT NULL DEFAULT '' COMMENT '时间戳：心跳机制，若HANDING状态下，大于5s未更新，则传输该记录的线程掉线',
      # 或者客户端采用文件锁（文件名为taskid_id）的形式取得独占
      # 若存在HANDING状态，且线程掉线，则主进程需新起传输线程，该新起传输进程对文件上锁，成功上锁则传输，不成功则获取下一个HANDING记录
-
+    `process` float(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '传输进度',
     `created_at` DATETIME NULL COMMENT '创建时间',
     `updated_at` DATETIME NULL COMMENT '修改时间',
     PRIMARY KEY (`id`)
